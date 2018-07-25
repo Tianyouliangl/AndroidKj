@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PercentProgressView">
+        <!-- 进度条当前进度的颜色 -->
+        <attr name="progress_color" format="color|reference"></attr>
+        <!-- 进度条的当前进度 -->
+        <attr name="progress" format="integer|float"></attr>
+        <!-- 进度条的总进度 -->
+        <attr name="total" format="integer|float"></attr>
+        <!-- 进度条总进度的颜色 -->
+        <attr name="total_color" format="color|reference"></attr>
+        <!-- 百分比字体的大小 -->
+        <attr name="text_size" format="dimension"></attr>
+        <!-- 进度条的宽度 -->
+        <attr name="progress_height" format="dimension"></attr>
+        <!-- 百分比字体的偏移量 -->
+        <attr name="text_offset" format="dimension"></attr>
+    </declare-styleable>
+</resources>

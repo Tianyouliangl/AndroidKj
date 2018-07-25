@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#297fca</color>
+
+    <color name="colorPrimaryDay">#C01E2F</color>
+    <color name="colorPrimaryDayDark">#A82828</color>
+    <color name="colorPrimaryDayAccent">#F65663</color>
+    <color name="colorDayTextLight">#B6B6BE</color>
+    <color name="colorDayTextDark">#444242</color>
+    <color name="colorDayBg">#FFFFFF</color>
+    <color name="colorDayBgDark">#ECECEC</color>
+    <color name="title_black">#222222</color>
+    <color name="search_bg">#bdbdbd</color>
+    <color name="mainTab">#348ce5</color>
+    <color name="seven">#777777</color>
+    <color name="three">#333333</color>
+    <color name="tableRow">#f7f7f7</color>
+    <color name="red">#ff4a3d</color>
+
+    <color name="toRegister">#dcecff</color>
+    <color name="fiveEight">#585858</color>
+    <color name="divide">#dddddd</color>
+    <color name="eight">#888888</color>
+    <color name="search">#F5F4F9</color>
+    <color name="theme_color">#297fca</color>
+    <color name="background_color">#f2f2f2</color>
+    <color name="sixZero">#606060</color>
+
+    <color name="six">#00000000</color>
+    <color name="sky_blue">#2A80CA</color>
+    <color name="background_wither">#51BED3</color>
+
+
+    <!--下载-->
+    <color name="blue_text_007dff">#ff007dff</color>
+    <color name="reserve_normal_textcolor">#fffffffe</color>
+    <color name="category_button_select_stroke">#4c007dff</color>
+    <color name="detail_downloadbutton_processing">#26007dff</color>
+    <color name="detail_install_color">#55007dff</color>
+
+    <color name="colorPrimarys">#3F51B5</color>
+    <color name="colorPrimaryDarks">#303F9F</color>
+    <color name="colorAccents">#FF4081</color>
+
+    <color name="whites">#FFFFFF</color>
+    <color name="white2s">#f5f3f3</color>
+    <color name="colorReds">#d50f09</color>
+</resources>
