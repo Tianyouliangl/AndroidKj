@@ -34,7 +34,7 @@
 
 
     <!--下载-->
-    <color name="blue_text_007dff">#ff007dff</color>
+    <color name="blue_text_007dff">#FF0000FF</color>
     <color name="reserve_normal_textcolor">#fffffffe</color>
     <color name="category_button_select_stroke">#4c007dff</color>
     <color name="detail_downloadbutton_processing">#26007dff</color>
