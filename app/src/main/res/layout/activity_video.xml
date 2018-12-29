@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.kj.app.view.activity.VideoActivity">
+    tools:context="com.lovelife.time.view.activity.VideoActivity">
 
 
     <include layout="@layout/custom_bar" android:id="@+id/bar"></include>

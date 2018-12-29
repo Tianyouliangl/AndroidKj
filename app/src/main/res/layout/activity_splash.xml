@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kj.app.view.activity.SplashActivity">
+    tools:context="com.lovelife.time.view.activity.SplashActivity">
    <ImageView
        android:id="@+id/iv_gif"
        android:layout_width="match_parent"
