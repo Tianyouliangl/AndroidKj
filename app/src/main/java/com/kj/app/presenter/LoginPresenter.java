@@ -31,12 +31,12 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                 .subscribe(new Consumer<BaseCallModel<HomeCarBean>>() {
                     @Override
                     public void accept(BaseCallModel<HomeCarBean> homeCarBeanBaseCallModel) throws Exception {
-                             mView.onSuccess(homeCarBeanBaseCallModel.data);
+                             mView.onSuccess();
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                             mView.onError(throwable+"");
+                             mView.onError();
 
                     }
                 });

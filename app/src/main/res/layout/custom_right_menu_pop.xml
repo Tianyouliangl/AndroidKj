@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+<CheckBox
+    android:id="@+id/rb_pop_check"
+    android:text="同时删除本地文件"
+    android:textSize="18sp"
+    android:textColor="@color/black"
+    android:paddingLeft="80dp"
+    android:layout_width="match_parent"
+    android:layout_height="50dp" />
+    <View
+        android:background="@color/divide"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></View>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <ImageView
+            android:src="@mipmap/delete"
+            android:padding="18dp"
+            android:layout_marginLeft="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <TextView
+            android:id="@+id/tv_pop_delete"
+            android:text="删除"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+    </RelativeLayout>
+
+    <View
+        android:background="@color/divide"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></View>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <ImageView
+            android:src="@mipmap/share"
+            android:padding="20dp"
+            android:layout_marginLeft="100dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <TextView
+            android:id="@+id/tv_pop_share"
+            android:text="分享"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+    </RelativeLayout>
+
+
+</LinearLayout>

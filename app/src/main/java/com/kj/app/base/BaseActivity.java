@@ -11,13 +11,11 @@ import android.view.ViewGroup;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.kj.app.R;
-import com.kj.app.app.Constant;
 import com.kj.app.app.DHApplication;
 import com.kj.app.app.LoadType;
 import com.kj.app.component_dagger.ActivityComponentm;
 import com.kj.app.component_dagger.DaggerActivityComponentm;
 import com.kj.app.module_dagger.ActivityModule;
-import com.kj.app.utlis.StatusBarUtil;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 

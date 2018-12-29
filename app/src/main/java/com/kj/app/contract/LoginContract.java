@@ -8,9 +8,9 @@ import com.kj.app.bean.RegisterAndLoginBean;
 public interface LoginContract {
     interface View extends BaseContract.BaseView {
 
-        void onSuccess(HomeCarBean msg);
+        void onSuccess();
 
-        void onError(String a);
+        void onError();
 
     }
 

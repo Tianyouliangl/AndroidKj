@@ -8,6 +8,7 @@ import com.blankj.utilcode.util.Utils;
 import com.kj.app.component_dagger.ApplicationComponent;
 import com.kj.app.component_dagger.DaggerApplicationComponent;
 import com.kj.app.module_dagger.ApplicationModule;
+import com.kj.app.sqdb.SQLiteDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,16 @@ import java.util.List;
 public class DHApplication extends Application {
 
     private static DHApplication mApp;
+    private static SQLiteDao dao;
     private ApplicationComponent mApplicationComponent;
     private static DHApplication mInstance;
+    private static Context context;
     private static List<Activity> mActivities = new ArrayList<>();
 
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         mInstance = this;
         initApplicationComponent();
         Utils.init(this);
@@ -54,6 +58,26 @@ public class DHApplication extends Application {
     public static DHApplication getInstance() {
         return mInstance;
     }
+    public static synchronized SQLiteDao getDao() {
+        if (dao == null) {
+            synchronized (DHApplication.class) {
+                if (dao == null) {
+                    dao = new SQLiteDao(context);
+                }
+            }
+        }
+        return dao;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static Context getContext() {
+        return context;
+    }
+
+
     public static void logout() {
         Activity activity = getTopActivity();
 

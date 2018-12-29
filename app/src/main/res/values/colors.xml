@@ -31,6 +31,10 @@
     <color name="six">#00000000</color>
     <color name="sky_blue">#2A80CA</color>
     <color name="background_wither">#51BED3</color>
+    <color name="btnBg">#B3378E3C</color>
+    <color name="them_splash">#2AC82E</color>
+
+    <color name="color_music">#8BE664</color>
 
 
     <!--下载-->
@@ -43,8 +47,12 @@
     <color name="colorPrimarys">#3F51B5</color>
     <color name="colorPrimaryDarks">#303F9F</color>
     <color name="colorAccents">#FF4081</color>
-
+    <color name="bar_login">#732AC82E</color>
     <color name="whites">#FFFFFF</color>
     <color name="white2s">#f5f3f3</color>
     <color name="colorReds">#d50f09</color>
+    <color name="green">#8000FF00</color>
+    <color name="like">#FF8C00</color>
+
+    <color name="musicPlay">#8B8B7A</color>
 </resources>

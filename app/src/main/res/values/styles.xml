@@ -2,18 +2,22 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/reserve_normal_textcolor</item>
-        <item name="colorPrimaryDark">@android:color/transparent</item>
-        <item name="android:windowAnimationStyle">@style/windowAnimation</item>
+        <!--<item name="colorPrimary">@color/background_wither</item>-->
+        <!--<item name="colorPrimaryDark">@android:color/transparent</item>-->
+        <!--<item name="android:windowAnimationStyle">@style/windowAnimation</item>-->
         <!-- Set menu background and text color -->
 
 
         //沉浸状态栏
-        <item name="android:windowIsTranslucent">false</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="android:windowIsTranslucent">false</item>-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
         <!--<item name="android:windowDisablePreview">true</item>-->
     </style>
+
     <style name="windowAnimation">
         <item name="android:activityOpenEnterAnimation">@anim/push_left_in</item>
         <item name="android:activityOpenExitAnimation">@anim/push_left_out</item>
@@ -25,8 +29,63 @@
         <item name="android:layout_width">47dp</item>
         <item name="android:background"></item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/divide</item>
         <item name="android:textSize">14sp</item>
-
     </style>
+
+    <!-- 为 Theme 设置背景图 -->
+    <style name="FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 防止欢迎页白屏或者黑屏，设置图片 -->
+        <item name="android:windowBackground">@color/them_splash</item>
+        <item name="android:windowFullscreen">true</item>  //全屏效果
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+    <style name="LoginFullScreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- 防止欢迎页白屏或者黑屏，设置图片 -->
+        <item name="android:windowFullscreen">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <!-- 自定义Loading Dialog -->
+    <style name="loading_dialog_style" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/divide</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="popwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophiden_anim</item>
+    </style>
+
+    <!--自定义seekbarstyle-->
+    <style name="CustomSeekbarStyle" >
+        <item name="android:maxHeight">10dp</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@color/colorAccent</item>
+        <item name="android:progressDrawable">@drawable/seekbar_progress_drawable</item>
+        <item name="android:minHeight">5dp</item>
+    </style>
+
+    <style name="CustomProgressDialog" parent="@style/CustomDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <!--  加载框 -->
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
 </resources>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/musicPlay"
+    android:layout_height="match_parent"
+    tools:context="com.kj.app.view.activity.MusicPlayActivity">
+
+    <include layout="@layout/custom_bar" android:id="@+id/play_top"></include>
+
+    <TextView
+        android:id="@+id/tv_play_name"
+        android:transitionName="musicName"
+        android:layout_below="@+id/play_top"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@id/tv_play_name"
+        android:layout_above="@id/rv_bottom"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/play_fm"
+            android:src="@mipmap/fm"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:transitionName="musicFM"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="220dp"
+            android:layout_centerInParent="true"
+            android:layout_height="220dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rv_bottom"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="140dp">
+        <LinearLayout
+            android:id="@+id/linear_top"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_play_left_time"
+                android:textColor="@color/black"
+                android:text="00:00"
+                android:textSize="14sp"
+                android:layout_marginRight="4dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <SeekBar
+                android:id="@+id/pb_play"
+                android:layout_toRightOf="@id/tv_play_left_time"
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:max="100"
+                android:layout_gravity="center_vertical"
+                android:maxHeight="10dp"
+                android:layout_toLeftOf="@id/tv_play_right_time"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_play_right_time"
+                android:textColor="@color/black"
+                android:text="00:00"
+                android:textSize="14sp"
+                android:layout_alignParentRight="true"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_marginLeft="4dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_below="@id/linear_top"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/iv_music_order"
+                android:src="@mipmap/nex"
+                android:padding="15dp"
+                android:layout_weight="1"
+                android:layout_below="@id/linear_top"
+                android:layout_centerVertical="true"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/iv_music_shang"
+                android:src="@mipmap/left_play"
+                android:padding="35dp"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/iv_music_play"
+                android:src="@mipmap/play"
+                android:padding="30dp"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/iv_music_xia"
+                android:src="@mipmap/right_play"
+                android:padding="35dp"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/iv_music_like"
+                android:src="@mipmap/like_d"
+                android:padding="15dp"
+                android:layout_weight="1"
+                android:layout_below="@id/linear_top"
+                android:layout_centerVertical="true"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

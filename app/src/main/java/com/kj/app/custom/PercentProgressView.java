@@ -1,4 +1,4 @@
-package com.kj.app.utlis;
+package com.kj.app.custom;
 
 import android.content.Context;
 import android.content.res.TypedArray;

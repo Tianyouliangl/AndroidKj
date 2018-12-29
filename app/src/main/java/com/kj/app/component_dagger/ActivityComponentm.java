@@ -7,6 +7,7 @@ import android.content.Context;
 import com.kj.app.module_dagger.ActivityModule;
 import com.kj.app.scope_dagger.ContextLife;
 import com.kj.app.scope_dagger.PerActivity;
+import com.kj.app.view.activity.MusicActivity;
 
 import dagger.Component;
 
@@ -22,4 +23,5 @@ public interface ActivityComponentm {
     Activity getActivity();
 
     //void inject(MainActivity activity);
+    void inject(MusicActivity musicActivity);
 }

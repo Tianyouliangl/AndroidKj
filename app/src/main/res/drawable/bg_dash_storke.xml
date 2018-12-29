@@ -6,5 +6,6 @@
         android:color="@color/search_bg"
         android:dashWidth="6dp"
         android:dashGap="8dp"/>
+    <corners android:radius="@dimen/dp_10"></corners>
 
 </shape>

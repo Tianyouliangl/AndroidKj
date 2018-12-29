@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:id="@+id/bar_bg"
+    android:layout_height="50dp">
+    <ImageView
+        android:src="@mipmap/back"
+        android:id="@+id/bar_iv_back"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:padding="12dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/bar_tv_title"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="标题"
+        android:maxLines="1"
+        android:transitionName="musicTitle"
+        android:gravity="center"
+        android:layout_weight="4"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/bar_tv_right"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/bar_iv_right"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+</LinearLayout>
