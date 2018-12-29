@@ -3,6 +3,7 @@ package com.lovelife.time.view.activity;
 
 
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
@@ -16,8 +17,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -61,6 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     Intent MediaServiceIntent;
     private static SimpleDateFormat time = new SimpleDateFormat("m:ss");
     public static Handler mHandler = new Handler();
+    private AlertDialog.Builder builder;
 
     @Override
     protected int getLayoutId() {
@@ -241,5 +245,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             }
         }
     };
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            showFinishDialog();
+            return false;
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
+    private void showFinishDialog() {
+            builder = new AlertDialog.Builder(this).setIcon(R.mipmap.logo).setTitle("爱生活")
+                    .setMessage("你确定要退出吗?").setPositiveButton("不想听了", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    }).setNegativeButton("继续听", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+            builder.create().show();
+
+    }
 
 }

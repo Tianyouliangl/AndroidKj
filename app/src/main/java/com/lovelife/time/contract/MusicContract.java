@@ -18,6 +18,7 @@ public interface MusicContract {
         void  getMusic(Context context);
         void  getMusicDbAll();
         void  deleteMusic(String id,String path,boolean isChecked);
+        boolean  getIsNull(String path);
 
     }
 }

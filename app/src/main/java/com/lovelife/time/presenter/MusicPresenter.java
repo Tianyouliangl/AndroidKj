@@ -70,6 +70,16 @@ public class MusicPresenter extends BasePresenter<MusicContract.MusicView> imple
         }
     }
 
+    @Override
+    public boolean getIsNull(String path) {
+        File mf = new File(path);
+        if(!mf.exists()){
+            mView.deleteError("文件不存在!");
+            return false;
+        }
+        return true;
+    }
+
     private boolean deleteBendi(String path) {
         File mf = new File(path);
         if(mf.exists()){

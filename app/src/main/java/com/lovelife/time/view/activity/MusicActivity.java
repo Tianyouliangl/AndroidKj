@@ -269,8 +269,12 @@ public class MusicActivity extends BaseActivity<MusicPresenter> implements View.
 //                        "musicTitle");
 //        ActivityCompat.startActivity(MusicActivity.this,intent,options.toBundle());  // 有问题
         mPlayMusic(musicInfo);
-        startActivity(intent);
-        ActivityManager.in(this);
+        boolean isNull = mPresenter.getIsNull(musicInfo.getPath());
+        if (isNull){
+            startActivity(intent);
+            ActivityManager.in(this);
+        }
+
 
     }
 
