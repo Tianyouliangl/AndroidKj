@@ -7,24 +7,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.provider.Settings;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.lovelife.time.R;
 import com.lovelife.time.adapter.HomeAdapter;
@@ -56,6 +54,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     RelativeLayout rl_left_menu;
     @BindView(R.id.iv_right_menu)
     ImageView iv_right_menu;
+    @BindView(R.id.tv_pop_title)
+    TextView tv_pop_title;
+    @BindView(R.id.tv_pop_author)
+    TextView tv_pop_author;
+    @BindView(R.id.main_bottom)
+    FrameLayout main_bottom;
+    @BindView(R.id.iv_pause_music)
+    ImageView iv_pause_music;
+    static TextView tv_pop_time;
     private List<Fragment> mFragmentList = new ArrayList<>(2);
     private String[] titles;
     private HomeAdapter adapter;
@@ -65,6 +72,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static SimpleDateFormat time = new SimpleDateFormat("m:ss");
     public static Handler mHandler = new Handler();
     private AlertDialog.Builder builder;
+    private boolean isPlayMusic = false;
 
     @Override
     protected int getLayoutId() {
@@ -79,8 +87,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initView() {
         StatusBarUtil.setWindowStatusBarColor(this,R.color.colorAccent);
+        tv_pop_time = findViewById(R.id.tv_pop_time);
         iv_left_menu.setOnClickListener(this);
         iv_right_menu.setOnClickListener(this);
+        main_bottom.setOnClickListener(this);
+        iv_pause_music.setOnClickListener(this);
         initService();
         initData();
         setAdapter();
@@ -118,6 +129,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     .above(mTabLayout,0,0,0)
                     .show();
         }
+        if (v.getId()==R.id.main_bottom){
+            startActivity(new Intent(this,MusicPlayActivity.class));
+        }
+        if (v.getId() == R.id.iv_pause_music){
+            if (isPlayMusic){
+                iv_pause_music.setImageResource(R.mipmap.start_l);
+                isPlayMusic = false;
+                mMyBinder.pauseMusic();
+            }else if (!isPlayMusic){
+                iv_pause_music.setImageResource(R.mipmap.pause_l);
+                isPlayMusic = true;
+                mMyBinder.playMusic();
+            }
+        }
     }
 
 
@@ -133,6 +158,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         }
     };
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String info = getPlayMusicInfo();
+        MusicInfo musicMsg = getPlayMusicMsg();
+        if (!TextUtils.isEmpty(info)){
+            main_bottom.setVisibility(View.VISIBLE);
+            String title = musicMsg.getTitle();
+            String name = musicMsg.getArtist();
+            tv_pop_title.setText(title);
+            tv_pop_author.setText(name);
+            if (mMyBinder.isPlaying()){
+                iv_pause_music.setImageResource(R.mipmap.pause_l);
+                isPlayMusic = true;
+            }else {
+                iv_pause_music.setImageResource(R.mipmap.start_l);
+                isPlayMusic = false;
+            }
+        }else {
+            main_bottom.setVisibility(View.GONE);
+        }
+    }
+
+    public static void setProgress(String playProgress,String progress){
+        if (tv_pop_time != null){
+            tv_pop_time.setText(playProgress+"/"+progress);
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -241,6 +296,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 MusicPlayActivity.setSeekProgress(mMyBinder.getPlayPosition());
                 MusicPlayActivity.setTvTimeRight(time.format(mMyBinder.getProgress()));
                 MusicPlayActivity.setSeekMax(mMyBinder.getProgress());
+                MainActivity.setProgress(time.format(mMyBinder.getPlayPosition()),time.format(mMyBinder.getProgress()));
                 mHandler.postDelayed(mRunnable, 1000);
             }
         }
@@ -270,7 +326,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         }
                     });
             builder.create().show();
-
     }
 
 }

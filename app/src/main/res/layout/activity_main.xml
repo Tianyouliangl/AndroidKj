@@ -75,6 +75,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </android.support.v4.view.ViewPager>
+
+        <include layout="@layout/layout_aplay_comment" android:id="@+id/main_bottom"></include>
+
     </RelativeLayout>
 
 
