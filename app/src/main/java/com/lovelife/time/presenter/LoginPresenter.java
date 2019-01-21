@@ -7,14 +7,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.lovelife.time.app.DHApplication;
 import com.lovelife.time.base.BasePresenter;
 import com.lovelife.time.contract.LoginContract;
-import com.lovelife.time.bean.UserInfoBean;
-import com.lovelife.time.utlis.LoadingUtil;
-import com.lovelife.time.utlis.SPUtils;
-import com.lovelife.time.weight.SPKey;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
 import com.tencent.tauth.IUiListener;
@@ -94,7 +88,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                     public void onComplete(Object response) {
                         Log.e(TAG, "登录成功" + response.toString());
                         Toast.makeText(mContext, "登录成功!", Toast.LENGTH_SHORT).show();
-                        LoadingUtil.hideLoading();
                         mView.onSuccess((JSONObject) response,openID);
                     }
 
@@ -103,7 +96,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                         mView.onError();
                         Log.e(TAG, "登录失败" + uiError.toString());
                         Toast.makeText(mContext, "登录失败!", Toast.LENGTH_SHORT).show();
-                        LoadingUtil.hideLoading();
                     }
 
                     @Override
@@ -111,7 +103,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
                         mView.onCancel();
                         Log.e(TAG, "登录取消");
                         Toast.makeText(mContext, "登录取消!", Toast.LENGTH_SHORT).show();
-                        LoadingUtil.hideLoading();
 
                     }
                 });
@@ -123,13 +114,11 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
 
         @Override
         public void onError(UiError uiError) {
-            LoadingUtil.hideLoading();
             Log.e(TAG, "登录失败" + uiError.toString());
         }
 
         @Override
         public void onCancel() {
-            LoadingUtil.hideLoading();
             Log.e(TAG, "登录取消");
         }
     }

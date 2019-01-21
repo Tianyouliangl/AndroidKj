@@ -34,7 +34,6 @@ import com.lovelife.time.base.BaseActivity;
 import com.lovelife.time.bean.MusicInfo;
 import com.lovelife.time.bean.UserInfoBean;
 import com.lovelife.time.service.MusicService;
-import com.lovelife.time.utlis.LoadingUtil;
 import com.lovelife.time.utlis.SPUtils;
 import com.lovelife.time.utlis.SnackbarUtils;
 import com.lovelife.time.utlis.StatusBarUtil;
@@ -106,7 +105,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void initView() {
         StatusBarUtil.setWindowStatusBarColor(this,R.color.colorAccent);
-        LoadingUtil.showLoading(this);
         tv_pop_time = findViewById(R.id.tv_pop_time);
         iv_left_menu.setOnClickListener(this);
         iv_right_menu.setOnClickListener(this);
@@ -137,17 +135,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         titles = new String[]{"我的","推荐"};
         if (info != null){
             Glide.with(this).load(info.getFigureurl_qq_1()).into(iv_left_menu);
-            LoadingUtil.hideLoading();
         }else {
             Toast.makeText(this,"获取信息失败!",Toast.LENGTH_SHORT).show();
-            LoadingUtil.hideLoading();
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        LoadingUtil.hideLoading();
     }
 
     @Override
@@ -373,7 +363,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     // 侧拉 打开
     @Override
     public void onDrawerOpened(@NonNull View drawerView) {
-        LoadingUtil.showLoading(this);
         Glide.with(this).load(info.getFigureurl_qq_1()).into(user_icon);
         user_name.setText(info.getNickname());
         String msg = info.getMsg();
@@ -382,7 +371,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }else {
             menu_user_msg.setText(msg);
         }
-        LoadingUtil.hideLoading();
     }
 
     @Override
