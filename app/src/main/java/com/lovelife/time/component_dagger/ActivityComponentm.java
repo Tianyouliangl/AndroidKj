@@ -7,6 +7,7 @@ import android.content.Context;
 import com.lovelife.time.module_dagger.ActivityModule;
 import com.lovelife.time.scope_dagger.ContextLife;
 import com.lovelife.time.scope_dagger.PerActivity;
+import com.lovelife.time.view.activity.LoginActivity;
 import com.lovelife.time.view.activity.MusicActivity;
 
 import dagger.Component;
@@ -24,4 +25,5 @@ public interface ActivityComponentm {
 
     //void inject(MainActivity activity);
     void inject(MusicActivity musicActivity);
+    void inject(LoginActivity loginActivity);
 }

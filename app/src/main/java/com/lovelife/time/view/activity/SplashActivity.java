@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ import com.github.dfqin.grantor.PermissionsUtil;
 import com.lovelife.time.R;
 import com.lovelife.time.app.DHApplication;
 import com.lovelife.time.base.BaseActivity;
+import com.lovelife.time.utlis.SPUtils;
+import com.lovelife.time.weight.SPKey;
 
 public class SplashActivity extends BaseActivity {
 
@@ -87,7 +90,14 @@ public class SplashActivity extends BaseActivity {
         PermissionsUtil.requestPermission(this, new PermissionListener() {
             @Override
             public void permissionGranted(@NonNull String[] permission) {
-                startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                Intent mIntent ;
+                String s = SPUtils.getInstance(SplashActivity.this).getString(SPKey.USER_ID);
+                if (TextUtils.isEmpty(s)){
+                 mIntent = new Intent(SplashActivity.this,LoginActivity.class);
+                }else {
+                 mIntent = new Intent(SplashActivity.this,MainActivity.class);
+                }
+                startActivity(mIntent);
                 DHApplication.getDao().createTab();
                 finish();
                 overridePendingTransition(R.anim.anim_in,R.anim.anim_out);

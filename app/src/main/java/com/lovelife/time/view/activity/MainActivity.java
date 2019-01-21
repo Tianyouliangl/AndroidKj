@@ -9,6 +9,7 @@ import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -23,16 +24,24 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.lovelife.time.R;
 import com.lovelife.time.adapter.HomeAdapter;
 import com.lovelife.time.base.BaseActivity;
 import com.lovelife.time.bean.MusicInfo;
+import com.lovelife.time.bean.UserInfoBean;
 import com.lovelife.time.service.MusicService;
+import com.lovelife.time.utlis.LoadingUtil;
+import com.lovelife.time.utlis.SPUtils;
 import com.lovelife.time.utlis.SnackbarUtils;
 import com.lovelife.time.utlis.StatusBarUtil;
 import com.lovelife.time.view.fragment.HomeFragmentMe;
 import com.lovelife.time.view.fragment.HomeFragmentRed;
+import com.lovelife.time.weight.SPKey;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,14 +49,14 @@ import java.util.List;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, DrawerLayout.DrawerListener {
 
     @BindView(R.id.tab_TabLayout)
     TabLayout mTabLayout;
     @BindView(R.id.vp_ViewPager)
     ViewPager mViewPager;
     @BindView(R.id.iv_left_menu)
-    ImageView iv_left_menu;
+    RoundedImageView iv_left_menu;
     @BindView(R.id.drawer)
     DrawerLayout m_drawer;
     @BindView(R.id.rl_left_menu)
@@ -62,6 +71,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     FrameLayout main_bottom;
     @BindView(R.id.iv_pause_music)
     ImageView iv_pause_music;
+
+    // user
+    @BindView(R.id.menu_user_icon)
+    RoundedImageView user_icon;
+    @BindView(R.id.menu_user_name)
+    TextView  user_name;
+    @BindView(R.id.menu_user_msg)
+    TextView menu_user_msg;
+
     static TextView tv_pop_time;
     private List<Fragment> mFragmentList = new ArrayList<>(2);
     private String[] titles;
@@ -73,6 +91,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public static Handler mHandler = new Handler();
     private AlertDialog.Builder builder;
     private boolean isPlayMusic = false;
+    private UserInfoBean info;
 
     @Override
     protected int getLayoutId() {
@@ -87,11 +106,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initView() {
         StatusBarUtil.setWindowStatusBarColor(this,R.color.colorAccent);
+        LoadingUtil.showLoading(this);
         tv_pop_time = findViewById(R.id.tv_pop_time);
         iv_left_menu.setOnClickListener(this);
         iv_right_menu.setOnClickListener(this);
         main_bottom.setOnClickListener(this);
         iv_pause_music.setOnClickListener(this);
+        m_drawer.addDrawerListener(this);
         initService();
         initData();
         setAdapter();
@@ -109,11 +130,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initData() {
+       // UserInfoBean info = DHApplication.getDao().getUserInfo();
+        info = new Gson().fromJson(SPUtils.getInstance(this).getString(SPKey.USER_INFO).toString(), UserInfoBean.class);
         mFragmentList.add(new HomeFragmentMe());
         mFragmentList.add(new HomeFragmentRed());
         titles = new String[]{"我的","推荐"};
+        if (info != null){
+            Glide.with(this).load(info.getFigureurl_qq_1()).into(iv_left_menu);
+            LoadingUtil.hideLoading();
+        }else {
+            Toast.makeText(this,"获取信息失败!",Toast.LENGTH_SHORT).show();
+            LoadingUtil.hideLoading();
+        }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LoadingUtil.hideLoading();
+    }
 
     @Override
     public void onClick(View v) {
@@ -155,6 +190,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+
 
         }
     };
@@ -304,6 +340,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            m_drawer.closeDrawer(rl_left_menu);
             showFinishDialog();
             return false;
         }else {
@@ -328,4 +365,33 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             builder.create().show();
     }
 
+    @Override
+    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+    }
+
+    // 侧拉 打开
+    @Override
+    public void onDrawerOpened(@NonNull View drawerView) {
+        LoadingUtil.showLoading(this);
+        Glide.with(this).load(info.getFigureurl_qq_1()).into(user_icon);
+        user_name.setText(info.getNickname());
+        String msg = info.getMsg();
+        if (TextUtils.isEmpty(msg)){
+            menu_user_msg.setText("没有签名");
+        }else {
+            menu_user_msg.setText(msg);
+        }
+        LoadingUtil.hideLoading();
+    }
+
+    @Override
+    public void onDrawerClosed(@NonNull View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+
+    }
 }

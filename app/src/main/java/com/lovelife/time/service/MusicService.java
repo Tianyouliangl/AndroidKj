@@ -13,6 +13,7 @@ import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.lovelife.time.BuildConfig;
@@ -362,8 +363,10 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     private MusicInfo getPlayPath() {
         List<MusicInfo> infos = DHApplication.getDao().getMusicAll(SQManager.SQLITE_MC_MSG);
         for (int i=0;i<infos.size();i++){
-            if (playPath.equals(infos.get(i).getPath())){
-                return infos.get(i);
+            if (!TextUtils.isEmpty(playPath)){
+                if (playPath.equals(infos.get(i).getPath())){
+                    return infos.get(i);
+                }
             }
         }
         return null;

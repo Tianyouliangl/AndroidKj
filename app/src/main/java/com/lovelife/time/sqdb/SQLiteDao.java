@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.lovelife.time.bean.MusicInfo;
+import com.lovelife.time.bean.UserInfoBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,30 @@ public class SQLiteDao {
             m_sqLite.execSQL("create table " + SQManager.SQLITE_MC_MSG
                     + " (id Integer primary key autoincrement, name VARCHAR, path VARCHAR, " +
                     " album VARCHAR, artist VARCHAR, size VARCHAR, duration VARCHAR, pinyin VARCHAR, time VARCHAR, title VARCHAR,mid VARCHAR);");
+        }
+        /**
+         * ret : 0
+         * msg :
+         * is_lost : 0
+         * nickname : 今日就到这吧.
+         * gender : 男
+         * province : 河北
+         * city : 邯郸
+         * year : 1994
+         * constellation :
+         * figureurl_qq_1 : http://thirdqq.qlogo.cn/qqapp/1105602574/43F331753E61315FE3B8818C484963C5/40
+         * is_yellow_vip : 0
+         * vip : 0
+         * yellow_vip_level : 0
+         * level : 0
+         * is_yellow_year_vip : 0
+         */
+        if (!tableIsExist(SQManager.SQLITE_USER_INFO)) {
+            m_sqLite.execSQL("create table " + SQManager.SQLITE_USER_INFO
+                    + " (id Integer primary key autoincrement, ret Integer, msg VARCHAR, " +
+                    " is_lost Integer, nickname VARCHAR, gender VARCHAR, province VARCHAR, city VARCHAR, year VARCHAR," +
+                    " constellation VARCHAR,figureurl_qq_1 VARCHAR,is_yellow_vip VARCHAR,vip VARCHAR,yellow_vip_level VARCHAR," +
+                    "level VARCHAR,is_yellow_year_vip VARCHAR);");
         }
     }
 
@@ -131,10 +156,93 @@ public class SQLiteDao {
      * @param tableName
      */
     public void deleteTab(String tableName){
-        Cursor cs;
         if (m_sqLite.isOpen()){
             m_sqLite.execSQL("DELETE FROM " + tableName );
         }
+    }
+    /**添加用户信息
+     * ret : 0
+     * msg :
+     * is_lost : 0
+     * nickname : 今日就到这吧.
+     * gender : 男
+     * province : 河北
+     * city : 邯郸
+     * year : 1994
+     * constellation :
+     * figureurl_qq_1 : http://thirdqq.qlogo.cn/qqapp/1105602574/43F331753E61315FE3B8818C484963C5/40
+     * is_yellow_vip : 0
+     * vip : 0
+     * yellow_vip_level : 0
+     * level : 0
+     * is_yellow_year_vip : 0
+     */
+    public void insetUserInfo(UserInfoBean user){
+        if (m_sqLite.isOpen()) {
+            ContentValues cv = new ContentValues();
+            cv.put("ret", user.getRet());
+            cv.put("msg", user.getMsg());
+            cv.put("is_lost",user.getIs_lost());
+            cv.put("nickname", user.getNickname());
+            cv.put("gender", user.getGender());
+            cv.put("province ", user.getProvince());
+            cv.put("city", user.getCity());
+            cv.put("year", user.getYear());
+            cv.put("constellation", user.getConstellation());
+            cv.put("figureurl_qq_1",user.getFigureurl_qq_1());
+            cv.put("is_yellow_vip ", user.getIs_yellow_vip());
+            cv.put("vip", user.getVip());
+            cv.put("yellow_vip_level", user.getYellow_vip_level());
+            cv.put("level", user.getLevel());
+            cv.put("is_yellow_year_vip",user.getIs_yellow_year_vip());
+            m_sqLite.insert(SQManager.SQLITE_USER_INFO, null, cv);
+        }
+    }
+    /**查询用户信息
+     * ret : 0
+     * msg :
+     * is_lost : 0
+     * nickname : 今日就到这吧.
+     * gender : 男
+     * province : 河北
+     * city : 邯郸
+     * year : 1994
+     * constellation :
+     * figureurl_qq_1 : http://thirdqq.qlogo.cn/qqapp/1105602574/43F331753E61315FE3B8818C484963C5/40
+     * is_yellow_vip : 0
+     * vip : 0
+     * yellow_vip_level : 0
+     * level : 0
+     * is_yellow_year_vip : 0
+     */
+    public UserInfoBean getUserInfo() {
+        Cursor cs;
+        UserInfoBean listBean = null;
+        if (m_sqLite.isOpen()) {
+            cs = m_sqLite.rawQuery("select * from " + SQManager.SQLITE_USER_INFO, null);
+            if (cs != null) {
+                while (cs.moveToNext()) {
+                    listBean = new UserInfoBean();
+                    listBean.setRet(cs.getInt(cs.getColumnIndex("ret")));
+                    listBean.setMsg(cs.getString(cs.getColumnIndex("msg")));
+                    listBean.setIs_lost(cs.getInt(cs.getColumnIndex("is_lost")));
+                    listBean.setNickname(cs.getString(cs.getColumnIndex("nickname")));
+                    listBean.setGender(cs.getString(cs.getColumnIndex("gender")));
+                    listBean.setProvince(cs.getString(cs.getColumnIndex("province")));
+                    listBean.setCity(cs.getString(cs.getColumnIndex("city")));
+                    listBean.setYear(cs.getString(cs.getColumnIndex("year")));
+                    listBean.setConstellation(cs.getString(cs.getColumnIndex("constellation")));
+                    listBean.setFigureurl_qq_1(cs.getString(cs.getColumnIndex("figureurl_qq_1")));
+                    listBean.setIs_yellow_vip(cs.getString(cs.getColumnIndex("is_yellow_vip")));
+                    listBean.setVip(cs.getString(cs.getColumnIndex("vip")));
+                    listBean.setYellow_vip_level(cs.getString(cs.getColumnIndex("yellow_vip_level")));
+                    listBean.setLevel(cs.getString(cs.getColumnIndex("level")));
+                    listBean.setIs_yellow_year_vip(cs.getString(cs.getColumnIndex("is_yellow_year_vip")));
+                }
+                cs.close();
+            }
+        }
+        return listBean;
     }
 
 }
