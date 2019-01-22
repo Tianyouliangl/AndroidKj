@@ -8,7 +8,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.lovelife.time.base.BasePresenter;
+import com.lovelife.time.bean.BaseCallModel;
+import com.lovelife.time.bean.HomeCarBean;
 import com.lovelife.time.contract.LoginContract;
+import com.lovelife.time.internet.ApiService;
+import com.lovelife.time.internet.RetrofitManager;
+import com.lovelife.time.utlis.RxSchedulers;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
 import com.tencent.tauth.IUiListener;
@@ -19,6 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.inject.Inject;
+
+import io.reactivex.functions.Consumer;
 
 public class LoginPresenter extends BasePresenter<LoginContract.View> implements LoginContract.Presenter {
 
@@ -35,25 +42,6 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
     }
 
 
-//    @Override
-//    public void getData() {
-//        RetrofitManager.create(ApiService.class)
-//                .getCarData(1)
-//                .compose(RxSchedulers.<BaseCallModel<HomeCarBean>>applySchedulers())
-//                .compose(mView.<BaseCallModel<HomeCarBean>>bindToLife())
-//                .subscribe(new Consumer<BaseCallModel<HomeCarBean>>() {
-//                    @Override
-//                    public void accept(BaseCallModel<HomeCarBean> homeCarBeanBaseCallModel) throws Exception {
-//                             mView.onSuccess();
-//                    }
-//                }, new Consumer<Throwable>() {
-//                    @Override
-//                    public void accept(Throwable throwable) throws Exception {
-//                             mView.onError();
-//
-//                    }
-//                });
-//    }
 
     @Override
     public void getData(Context context, String p) {
@@ -62,6 +50,22 @@ public class LoginPresenter extends BasePresenter<LoginContract.View> implements
         if (TextUtils.isEmpty(p)) return;
         uiListener = new BaseUiListener();
         tencent.login((Activity) context, p, uiListener);
+//        RetrofitManager.create(ApiService.class)
+//                .getCarData(1)
+//                .compose(RxSchedulers.<BaseCallModel<HomeCarBean>>applySchedulers())
+//                .compose(mView.<BaseCallModel<HomeCarBean>>bindToLife())
+//                .subscribe(new Consumer<BaseCallModel<HomeCarBean>>() {
+//                    @Override
+//                    public void accept(BaseCallModel<HomeCarBean> homeCarBeanBaseCallModel) throws Exception {
+//
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable throwable) throws Exception {
+//
+//
+//                    }
+//                });
     }
 
     @Override
